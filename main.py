@@ -13,7 +13,7 @@ load_dotenv()
 async def main():
     DISCORD_TOKEN: str = os.getenv("DISCORD_TOKEN", "")
     #TWITCH_TOKEN: str = os.getenv("TWITCH_TOKEN", "")
-    DISCORD_CHANNEL_ID: int = 1383904712624963685
+    DISCORD_CHANNEL_ID: int = int(os.getenv("DISCORD_CHANNEL_ID", ""))
     
     # Create bots
     discord_bot = create_bot(DISCORD_TOKEN, DISCORD_CHANNEL_ID)
