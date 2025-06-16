@@ -25,6 +25,7 @@ class MyCog(commands.Cog):
     @commands.command()
     async def ping(self, ctx: Context[Bot]):
         await ctx.send(f"Latency: {round(self.bot.latency * 1000, 3)}ms")
+        discord_logger.info("A user issued the ping command")
 
 class DiscordBot(Bot):
     def __init__(self, channel_id, *args, **kwargs):
