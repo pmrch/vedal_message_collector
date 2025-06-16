@@ -2,7 +2,7 @@ import os
 import asyncio
 
 from dotenv import load_dotenv
-from src.bots.discord_bot.bot import create_bot
+from src.bots.discord_bot.bot import create_bot, MyCog
 from src.bots.twitch_bot.bot import Bot
 
 
@@ -17,6 +17,8 @@ async def main():
     
     # Create bots
     discord_bot = create_bot(DISCORD_TOKEN, DISCORD_CHANNEL_ID)
+    await discord_bot.add_cog(MyCog(discord_bot))
+    
     twitch_bot = Bot(discord_bot=discord_bot)
     
     # Run both
