@@ -50,10 +50,10 @@ class DiscordBot(Bot):
         # Catch any command sent by user(s)    
         await self.process_commands(message)
     
-    async def on_ved_message(self, message_content: str, channel_id: int, message_author: str):
+    async def on_ved_message(self, message_content: str, channel_id: int, message_author: str, message_channel: str):
         channel = self.get_channel(channel_id)
         if channel and isinstance(channel, discord.abc.Messageable): 
-            await channel.send(f"{message_author}: {message_content}")
+            await channel.send(f"Channel: {message_channel} | {message_author}: {message_content}")
         else:
             discord_logger.error("Can't send message: Invalid channel or missing permissions.")
 
