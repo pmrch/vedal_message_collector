@@ -24,7 +24,11 @@ class Bot(commands.Bot):
         # and a list of channels to join on start...
         ACCESS_TOKEN: str = os.getenv("TWITCH_TOKEN", "")
         prefix: str = "!"
-        initial_channels: List[str] = ["vedal987", "minikomew", "laynalazar", "cerbervt", "anny", "not_anny", "ellie_minibot"]
+        initial_channels: List[str] = []
+        
+        with open("data/vip_channels.txt", "rt", encoding="utf-8", errors="ignore") as f:
+            for line in f.readlines():
+                initial_channels.append(line.strip())
         
         self.discord_bot = discord_bot
         self.vip_list: List[str] = []
@@ -35,6 +39,7 @@ class Bot(commands.Bot):
                 self.vip_list.append(line.strip().lower())
             
         print(self.vip_list)
+        print(initial_channels)
         
         super().__init__( # type: ignore
             token=ACCESS_TOKEN,

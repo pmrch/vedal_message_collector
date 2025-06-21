@@ -2,7 +2,7 @@
 
 # Full imports
 import discord
-import logging
+import re
 import os
 
 # Partial imports
@@ -52,8 +52,14 @@ class DiscordBot(Bot):
     
     async def on_ved_message(self, message_content: str, channel_id: int, message_author: str, message_channel: str):
         channel = self.get_channel(channel_id)
-        if channel and isinstance(channel, discord.abc.Messageable): 
-            await channel.send(f"Channel: {message_channel} | {message_author}: {message_content}")
+        pattern = re.compile(r'mewed for mini OwO\s*$', re.IGNORECASE)
+        
+        if channel and isinstance(channel, discord.abc.Messageable):
+            if not pattern.search(message_content):
+                await channel.send(f"Channel: {message_channel} | {message_author}: {message_content}")
+            else:
+                return
+        
         else:
             discord_logger.error("Can't send message: Invalid channel or missing permissions.")
 
